@@ -1,0 +1,113 @@
+.trash {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.trash__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.trash__count {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+.trash__empty {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.trash__refusal {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-raised);
+  color: var(--color-pink);
+}
+
+.trash__list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trash__bug {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+
+  &[open] {
+    border-color: var(--color-accent);
+  }
+}
+
+.trash__summary {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+}
+
+.trash__file {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.trash__title {
+  font-weight: 800;
+}
+
+.trash__details {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0 var(--space-4);
+
+  dt {
+    margin-top: var(--space-2);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+}
+
+.trash__lesson {
+  color: var(--color-mint) !important;
+  font-style: italic;
+}
+
+.trash__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  list-style: none;
+
+  li {
+    padding: 2px var(--space-2);
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-peach);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+}

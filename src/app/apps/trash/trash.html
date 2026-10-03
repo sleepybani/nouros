@@ -1,0 +1,44 @@
+<div class="trash">
+  <div class="trash__toolbar">
+    <p class="trash__count">🐛 {{ bugs.length }} bugs survived · 0 left (hopefully)</p>
+    <button type="button" class="trash__empty" (click)="refusedToEmpty.set(true)">
+      Empty trash
+    </button>
+  </div>
+
+  @if (refusedToEmpty()) {
+    <p class="trash__refusal" role="status">
+      Nope. These bugs made me who I am. They stay here. 💜
+    </p>
+  }
+
+  <ul class="trash__list">
+    @for (bug of bugs; track bug.slug) {
+      <li>
+        <details class="trash__bug">
+          <summary class="trash__summary">
+            <span class="trash__file">{{ bug.slug }}.log</span>
+            <span class="trash__title">{{ bug.title }}</span>
+          </summary>
+
+          <dl class="trash__details">
+            <dt>😵 Symptom</dt>
+            <dd>{{ bug.symptom }}</dd>
+            <dt>🔍 Cause</dt>
+            <dd>{{ bug.cause }}</dd>
+            <dt>🔧 Fix</dt>
+            <dd>{{ bug.fix }}</dd>
+            <dt>💡 Lesson</dt>
+            <dd class="trash__lesson">{{ bug.lesson }}</dd>
+          </dl>
+
+          <ul class="trash__tags" aria-label="Tags">
+            @for (tag of bug.tags; track tag) {
+              <li>{{ tag }}</li>
+            }
+          </ul>
+        </details>
+      </li>
+    }
+  </ul>
+</div>
