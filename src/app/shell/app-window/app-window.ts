@@ -1,23 +1,12 @@
-import { NgComponentOutlet } from '@angular/common';
-import {
-  Component,
-  Injector,
-  OnInit,
-  PendingTasks,
-  Type,
-  computed,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { AppLauncher } from '../../core/app-launcher';
-import { APP_PARAMS } from '../../core/app-params';
 import { findAppById } from '../../core/app-registry';
 import { WindowManager, WindowState } from '../../core/window-manager';
+import { AppContent } from '../app-content/app-content';
 
 @Component({
   selector: 'app-window',
-  imports: [NgComponentOutlet],
+  imports: [AppContent],
   templateUrl: './app-window.html',
   styleUrl: './app-window.scss',
   host: {
@@ -35,30 +24,16 @@ import { WindowManager, WindowState } from '../../core/window-manager';
     '(keydown.escape)': 'close()',
   },
 })
-export class AppWindow implements OnInit {
+export class AppWindow {
   readonly state = input.required<WindowState>();
 
   private readonly launcher = inject(AppLauncher);
   private readonly windowManager = inject(WindowManager);
 
   protected readonly app = computed(() => findAppById(this.state().appId));
+  protected readonly params = computed(() => this.state().params);
   protected readonly titleId = computed(() => `window-title-${this.state().appId}`);
   protected readonly isFocused = computed(() => this.windowManager.isFocused(this.state().appId));
-  protected readonly appComponent = signal<Type<unknown> | undefined>(undefined);
-
-  protected readonly appInjector = Injector.create({
-    providers: [{ provide: APP_PARAMS, useValue: computed(() => this.state().params) }],
-    parent: inject(Injector),
-  });
-
-  private readonly pendingTasks = inject(PendingTasks);
-
-  ngOnInit(): void {
-    // Registered as a pending task so `whenStable()` (tests, SSR) waits for the app code to load.
-    this.pendingTasks.run(async () => {
-      this.appComponent.set(await this.app().loadComponent());
-    });
-  }
 
   protected bringToFront(): void {
     if (!this.isFocused()) {

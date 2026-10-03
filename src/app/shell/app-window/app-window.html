@@ -20,10 +20,4 @@
   </h2>
 </header>
 
-<div class="app-window__content">
-  @if (appComponent(); as component) {
-    <ng-container *ngComponentOutlet="component; injector: appInjector" />
-  } @else {
-    <p class="app-window__loading">Loading…</p>
-  }
-</div>
+<app-content class="app-window__content" [app]="app()" [params]="params()" />

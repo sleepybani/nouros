@@ -1,3 +1,5 @@
+@use 'breakpoints';
+
 :host {
   position: absolute;
   top: var(--window-y);
@@ -74,15 +76,20 @@
   font-weight: 600;
 }
 
-/* Apps can use @container queries to adapt to the window size, not the screen size. */
 .app-window__content {
   flex: 1;
   overflow: auto;
-  container-type: inline-size;
 }
 
-.app-window__loading {
-  padding: var(--space-6);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
+/* Tablets: no room for floating windows, each window fills the desktop above the taskbar. */
+@media (max-width: (breakpoints.$desktop-min - 1px)) {
+  :host {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - var(--taskbar-height));
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+  }
 }

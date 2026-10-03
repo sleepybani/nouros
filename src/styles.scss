@@ -104,8 +104,8 @@ kbd {
   }
 
   .app-window__content {
-    overflow: visible;
-    container-type: normal;
+    overflow: visible !important;
+    container-type: normal !important;
   }
 }
 
