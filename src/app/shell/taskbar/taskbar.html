@@ -25,7 +25,13 @@
   </ul>
 
   @for (app of taskbarApps; track app.id) {
-    <button type="button" class="taskbar__cv" (click)="launcher.launch(app)">
+    <button
+      type="button"
+      class="taskbar__cv"
+      [class.taskbar__cv--focused]="windowManager.isFocused(app.id)"
+      [attr.aria-pressed]="windowManager.isFocused(app.id)"
+      (click)="openOrToggle(app)"
+    >
       <img [src]="app.icon" alt="" width="18" height="18" />
       {{ app.title }}
     </button>

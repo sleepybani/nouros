@@ -47,4 +47,17 @@ describe('Taskbar', () => {
 
     expect(TestBed.inject(Router).url).toBe('/cv');
   });
+
+  it('does not list the CV twice and uses the Quick CV button to minimize it', async () => {
+    const quickCvButton = taskbar().querySelector<HTMLButtonElement>('.taskbar__cv')!;
+    await harness.navigateByUrl('/cv');
+
+    expect(windowButtons()).toHaveLength(0);
+    expect(quickCvButton.getAttribute('aria-pressed')).toBe('true');
+
+    quickCvButton.click();
+    await harness.fixture.whenStable();
+
+    expect(TestBed.inject(WindowManager).isFocused('cv')).toBe(false);
+  });
 });

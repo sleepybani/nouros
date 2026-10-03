@@ -1,5 +1,15 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, Injector, OnInit, Type, computed, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  Injector,
+  OnInit,
+  PendingTasks,
+  Type,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { AppLauncher } from '../../core/app-launcher';
 import { APP_PARAMS } from '../../core/app-params';
 import { findAppById } from '../../core/app-registry';
@@ -41,8 +51,13 @@ export class AppWindow implements OnInit {
     parent: inject(Injector),
   });
 
-  async ngOnInit(): Promise<void> {
-    this.appComponent.set(await this.app().loadComponent());
+  private readonly pendingTasks = inject(PendingTasks);
+
+  ngOnInit(): void {
+    // Registered as a pending task so `whenStable()` (tests, SSR) waits for the app code to load.
+    this.pendingTasks.run(async () => {
+      this.appComponent.set(await this.app().loadComponent());
+    });
   }
 
   protected bringToFront(): void {

@@ -74,9 +74,11 @@
   font-weight: 600;
 }
 
+/* Apps can use @container queries to adapt to the window size, not the screen size. */
 .app-window__content {
   flex: 1;
   overflow: auto;
+  container-type: inline-size;
 }
 
 .app-window__loading {

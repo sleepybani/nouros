@@ -67,6 +67,48 @@ kbd {
   white-space: nowrap;
 }
 
+/* Printing from the Quick CV: hide the whole desktop, keep only the window holding `.printable`. */
+@media print {
+  body {
+    background: none;
+    color: #000;
+  }
+
+  .desktop {
+    height: auto;
+    overflow: visible;
+  }
+
+  .desktop__windows {
+    position: static;
+  }
+
+  .desktop__icons,
+  .desktop__widget,
+  .desktop__corner,
+  app-taskbar,
+  app-window:not(:has(.printable)),
+  .app-window__titlebar {
+    display: none !important;
+  }
+
+  app-window {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  .app-window__content {
+    overflow: visible;
+    container-type: normal;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

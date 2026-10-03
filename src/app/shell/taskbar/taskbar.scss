@@ -81,6 +81,15 @@
   font-weight: 600;
 }
 
+.taskbar__cv--focused {
+  background: var(--color-sky);
+  color: var(--color-bg);
+
+  &:hover {
+    background: var(--color-sky);
+  }
+}
+
 .taskbar__clock {
   min-width: 3.5em;
   text-align: right;

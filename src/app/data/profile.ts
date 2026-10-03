@@ -14,6 +14,8 @@ export const PROFILE = {
     linkedin: '',
     email: '',
   },
+  /** Formspree (or similar) endpoint, e.g. https://formspree.io/f/abcd1234. Empty = mailto fallback. */
+  contactFormEndpoint: '',
 };
 
 export const TASKBAR_STATUSES: readonly TaskbarStatus[] = [
