@@ -1,0 +1,32 @@
+/* Long-form text rendered from Markdown (Notes). Global because [innerHTML] content is not covered by component styles. */
+.prose {
+  max-width: 65ch;
+  line-height: 1.7;
+
+  :is(h2, h3) {
+    margin-top: var(--space-6);
+    color: var(--color-lavender);
+  }
+
+  :is(ul, ol) {
+    padding-left: var(--space-6);
+  }
+
+  li + li {
+    margin-top: var(--space-1);
+  }
+
+  code {
+    padding: 1px var(--space-1);
+    border-radius: 4px;
+    background: var(--color-bg);
+    color: var(--color-mint);
+  }
+
+  blockquote {
+    margin: var(--space-4) 0;
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--color-pink);
+    color: var(--color-text-muted);
+  }
+}

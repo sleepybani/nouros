@@ -41,7 +41,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'notes',
     placement: 'desktop',
     defaultSize: { width: 740, height: 540 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/notes/notes').then((m) => m.Notes),
   },
   {
     id: 'paint',
