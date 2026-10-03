@@ -14,8 +14,26 @@
   padding: var(--space-4);
 }
 
+.desktop__widget {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+}
+
 .desktop__corner {
   position: absolute;
   right: var(--space-4);
   bottom: calc(var(--taskbar-height) + var(--space-4));
+}
+
+/* Own stacking context: window z-indexes never go above the taskbar. */
+.desktop__windows {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
 }

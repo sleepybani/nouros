@@ -7,13 +7,19 @@
     }
   </nav>
 
+  <app-reminder-widget class="desktop__widget" />
+
   <nav class="desktop__corner" aria-label="System">
     @for (app of cornerApps; track app.id) {
       <app-desktop-icon [app]="app" />
     }
   </nav>
 
-  @for (appWindow of windowManager.windows(); track appWindow.appId) {
-    <app-window [state]="appWindow" />
-  }
+  <div class="desktop__windows">
+    @for (appWindow of windowManager.windows(); track appWindow.appId) {
+      <app-window [state]="appWindow" />
+    }
+  </div>
+
+  <app-taskbar />
 </main>
