@@ -1,0 +1,71 @@
+.explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.explorer__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.explorer__back {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
+
+.explorer__path {
+  flex: 1;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.explorer__body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-4);
+}
+
+.explorer__heading {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.explorer__list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.explorer__not-found {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+}
+
+.explorer__link-button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-link);
+  text-decoration: underline;
+  cursor: pointer;
+}
