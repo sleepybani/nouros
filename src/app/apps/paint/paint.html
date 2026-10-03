@@ -1,0 +1,50 @@
+<div class="paint">
+  <ul class="paint__palette" aria-label="NourOS palette">
+    @for (swatch of palette; track swatch.name) {
+      <li class="paint__swatch" [style.--swatch-color]="'var(' + swatch.cssVariable + ')'">
+        <span class="paint__swatch-color" aria-hidden="true"></span>
+        {{ swatch.name }}
+      </li>
+    }
+  </ul>
+
+  <section class="paint__canvas">
+    @if (openedArtwork(); as artwork) {
+      <button type="button" class="paint__back" (click)="backToGallery()">← Gallery</button>
+      <figure class="paint__artwork">
+        <img [src]="artwork.image" [alt]="artwork.title" />
+        <figcaption>
+          <h3>{{ artwork.title }}</h3>
+          <p class="paint__artwork-meta">{{ artwork.medium }} · {{ artwork.year }}</p>
+          <p>{{ artwork.description }}</p>
+        </figcaption>
+      </figure>
+    } @else if (artworks().length > 0) {
+      <ul class="paint__gallery">
+        @for (artwork of artworks(); track artwork.slug) {
+          <li>
+            <button type="button" class="paint__thumbnail" (click)="openArtwork(artwork)">
+              <img [src]="artwork.image" [alt]="artwork.title" loading="lazy" />
+              <span>{{ artwork.title }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="paint__empty">
+        <p class="paint__empty-emoji" aria-hidden="true">🖼️</p>
+        <p>The gallery is being hung.</p>
+        <p class="paint__empty-hint">Paintings coming soon!</p>
+      </div>
+    }
+  </section>
+
+  <section class="paint__notes">
+    <h3>Artist notes</h3>
+    <ul>
+      @for (note of artistNotes; track note) {
+        <li>{{ note }}</li>
+      }
+    </ul>
+  </section>
+</div>
