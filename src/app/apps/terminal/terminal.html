@@ -1,0 +1,31 @@
+<!-- Clicking anywhere in the terminal focuses the input, like a real one. Keyboard users already land on the input. -->
+<!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -->
+<div class="terminal" #screen (click)="focusInput()">
+  <div class="terminal__output" aria-live="polite">
+    @for (entry of entries(); track entry.id) {
+      <div class="terminal__entry">
+        <p class="terminal__line">
+          <span class="terminal__prompt">{{ prompt }}</span> {{ entry.command }}
+        </p>
+        @for (line of entry.lines; track $index) {
+          <p class="terminal__line terminal__line--output">{{ line }}</p>
+        }
+      </div>
+    }
+  </div>
+
+  <form class="terminal__form" (submit)="submit($event)">
+    <label class="terminal__prompt" for="terminal-input">{{ prompt }}</label>
+    <input
+      #commandInput
+      id="terminal-input"
+      class="terminal__input"
+      name="command"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+      (keydown.arrowup)="showPreviousCommand($event)"
+      (keydown.arrowdown)="showNextCommand($event)"
+    />
+  </form>
+</div>

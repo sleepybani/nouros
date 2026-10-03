@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.terminal {
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: #110f1b;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  cursor: text;
+}
+
+.terminal__entry {
+  margin-bottom: var(--space-3);
+}
+
+.terminal__line {
+  min-height: 1.5em;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal__line--output {
+  color: var(--color-text-muted);
+}
+
+.terminal__prompt {
+  color: var(--color-mint);
+}
+
+.terminal__form {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.terminal__input {
+  flex: 1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  caret-color: var(--color-pink);
+
+  &:focus-visible {
+    box-shadow: none;
+  }
+}
