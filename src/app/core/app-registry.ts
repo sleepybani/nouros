@@ -1,0 +1,98 @@
+import { AppId, OsApp } from './os-app';
+
+const loadComingSoon = () => import('../apps/coming-soon/coming-soon').then((m) => m.ComingSoon);
+
+export const OS_APPS: readonly OsApp[] = [
+  {
+    id: 'explorer',
+    title: 'Explorer',
+    subtitle: 'Projects',
+    icon: 'icons/explorer.svg',
+    route: 'projects',
+    placement: 'desktop',
+    defaultSize: { width: 780, height: 540 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'terminal',
+    title: 'Terminal',
+    subtitle: 'Who am I?',
+    icon: 'icons/terminal.svg',
+    route: 'terminal',
+    placement: 'desktop',
+    defaultSize: { width: 660, height: 420 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'mail',
+    title: 'Mail',
+    subtitle: 'Contact me',
+    icon: 'icons/mail.svg',
+    route: 'contact',
+    placement: 'desktop',
+    defaultSize: { width: 580, height: 540 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'notes',
+    title: 'Notes',
+    subtitle: 'Blog',
+    icon: 'icons/notes.svg',
+    route: 'notes',
+    placement: 'desktop',
+    defaultSize: { width: 740, height: 540 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'paint',
+    title: 'Paint.exe',
+    subtitle: 'Creative side',
+    icon: 'icons/paint.svg',
+    route: 'paint',
+    placement: 'desktop',
+    defaultSize: { width: 780, height: 560 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'games',
+    title: 'Games',
+    subtitle: 'Personality',
+    icon: 'icons/games.svg',
+    route: 'games',
+    placement: 'desktop',
+    defaultSize: { width: 560, height: 460 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'trash',
+    title: 'Trash',
+    subtitle: 'Bugs I survived',
+    icon: 'icons/trash.svg',
+    route: 'trash',
+    placement: 'corner',
+    defaultSize: { width: 640, height: 500 },
+    loadComponent: loadComingSoon,
+  },
+  {
+    id: 'cv',
+    title: 'Quick CV',
+    subtitle: 'Resume',
+    icon: 'icons/cv.svg',
+    route: 'cv',
+    placement: 'taskbar',
+    defaultSize: { width: 700, height: 620 },
+    loadComponent: loadComingSoon,
+  },
+];
+
+export function findAppById(appId: AppId): OsApp {
+  const app = OS_APPS.find((candidate) => candidate.id === appId);
+  if (!app) {
+    throw new Error(`Unknown app id: ${appId}`);
+  }
+  return app;
+}
+
+export function findAppByRoute(route: string): OsApp | undefined {
+  return OS_APPS.find((candidate) => candidate.route === route);
+}
