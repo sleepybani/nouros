@@ -1,0 +1,57 @@
+@if (launcher.currentLocation(); as location) {
+  <div class="mobile-page">
+    <header class="mobile-page__bar">
+      <button
+        type="button"
+        class="mobile-page__back"
+        aria-label="Back to home"
+        (click)="launcher.goHome()"
+      >
+        ←
+      </button>
+      <img [src]="location.app.icon" alt="" width="24" height="24" />
+      <h1 class="mobile-page__title">{{ location.app.title }}</h1>
+    </header>
+
+    <main class="mobile-page__content">
+      <app-content [app]="location.app" [params]="location.params" />
+    </main>
+  </div>
+} @else {
+  <main class="mobile-home">
+    <header class="mobile-home__header">
+      <h1 class="mobile-home__logo">🌙 NourOS</h1>
+      <p class="mobile-home__tagline">{{ profile.tagline }}</p>
+    </header>
+
+    <ul class="mobile-home__statuses" aria-label="Status">
+      @for (status of statuses; track status.label) {
+        <li>
+          <span class="mobile-home__status-label">{{ status.label }}:</span> {{ status.value }}
+        </li>
+      }
+    </ul>
+
+    <nav aria-label="Apps">
+      <ul class="mobile-home__cards">
+        @for (app of cardApps; track app.id) {
+          <li>
+            <button type="button" class="mobile-home__card" (click)="launcher.launch(app)">
+              <img [src]="app.icon" alt="" width="40" height="40" />
+              <span class="mobile-home__card-title">{{ app.title }}</span>
+              <span class="mobile-home__card-subtitle">{{ app.subtitle }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <app-reminder-widget class="mobile-home__reminder" />
+  </main>
+
+  @for (app of pinnedApps; track app.id) {
+    <button type="button" class="mobile-home__pinned" (click)="launcher.launch(app)">
+      {{ app.title }}
+    </button>
+  }
+}
