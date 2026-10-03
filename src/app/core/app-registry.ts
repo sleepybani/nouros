@@ -21,7 +21,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'terminal',
     placement: 'desktop',
     defaultSize: { width: 660, height: 420 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/terminal/terminal').then((m) => m.Terminal),
   },
   {
     id: 'mail',
