@@ -1,0 +1,86 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: var(--color-bg);
+  cursor: pointer;
+  animation: boot-fade-in 300ms ease-out;
+}
+
+.boot {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  max-width: 420px;
+  text-align: center;
+}
+
+.boot__logo {
+  margin: 0;
+  color: var(--color-lavender);
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.boot__starting {
+  margin: 0;
+  font-family: var(--font-mono);
+}
+
+.boot__progress {
+  width: 220px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-surface-raised);
+}
+
+.boot__progress-bar {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-lavender), var(--color-pink), var(--color-mint));
+  animation: boot-progress 1.9s ease-in-out forwards;
+}
+
+.boot__lines {
+  min-height: 6.5em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+
+  li {
+    animation: boot-fade-in 200ms ease-out;
+  }
+}
+
+.boot__tagline {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.boot__hint {
+  margin: 0;
+  color: var(--color-border);
+  font-size: 0.75rem;
+}
+
+@keyframes boot-progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes boot-fade-in {
+  from {
+    opacity: 0;
+  }
+}

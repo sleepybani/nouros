@@ -211,54 +211,55 @@ Tokens de départ (à ajuster sur Figma) :
 
 ### Phase 0 — Préparation (½ journée)
 
-- [ ] Créer la repo GitHub `nouros`
+- [x] Créer la repo GitHub `nouros`
 - [ ] Maquette papier/Figma : bureau desktop + 1 fenêtre + écran mobile
-- [ ] Valider les 6 icônes + Corbeille
+- [x] Valider les 6 icônes + Corbeille
 - [ ] Rassembler le contenu brut : textes projets, screenshots, CV PDF, 3–5 bugs, 3–6 peintures
 
 ### Phase 1 — Squelette (1–2 jours)
 
-- [ ] `ng new` (standalone, SCSS, routing), ESLint + Prettier
-- [ ] Design tokens + fond du bureau
-- [ ] `app-registry` + `WindowManagerService` (open/close/focus/minimize) + tests
-- [ ] `DesktopComponent`, `IconComponent`, `WindowComponent` (statique, positionné en cascade)
-- [ ] `TaskbarComponent` avec statuts + horloge + Quick CV
+- [x] `ng new` (standalone, SCSS, routing), ESLint + Prettier
+- [x] Design tokens + fond du bureau
+- [x] `app-registry` + `WindowManagerService` (open/close/focus/minimize) + tests
+- [x] `DesktopComponent`, `IconComponent`, `WindowComponent` (statique, positionné en cascade)
+- [x] `TaskbarComponent` avec statuts + horloge + Quick CV
 
 ### Phase 2 — Contenu P0 (2–3 jours)
 
-- [ ] Explorer : liste projets + détail projet (5 projets)
-- [ ] Terminal : saisie, historique (↑/↓), commandes `help whoami skills projects contact funfacts clear`
-- [ ] Mail : formulaire + liens
-- [ ] Quick CV : fenêtre + PDF
+- [x] Explorer : liste projets + détail projet (5 projets)
+- [x] Terminal : saisie, historique (↑/↓), commandes `help whoami skills projects contact funfacts clear`
+- [x] Mail : formulaire + liens
+- [x] Quick CV : fenêtre + PDF
 
 ### Phase 3 — Mobile (1–2 jours)
 
-- [ ] `BreakpointService` + `MobileLauncherComponent` (cards)
-- [ ] Routes partagées desktop/mobile (deep links)
+- [x] `BreakpointService` + `MobileLauncherComponent` (cards)
+- [x] Routes partagées desktop/mobile (deep links)
 - [ ] Test sur vrai téléphone
 
 > Mobile avant P1 volontairement : un recruteur ouvre souvent le lien sur téléphone.
 
 ### Phase 4 — Contenu P1/P2 (2–3 jours)
 
-- [ ] Trash (bugs survived)
-- [ ] Notes (articles Markdown)
-- [ ] Paint.exe (galerie)
-- [ ] Games (hobbies)
-- [ ] Widget « Today's reminder » (rotation aléatoire)
+- [x] Trash (bugs survived)
+- [x] Notes (articles Markdown)
+- [x] Paint.exe (galerie)
+- [x] Games (hobbies)
+- [x] Widget « Today's reminder » (rotation aléatoire)
 
 ### Phase 5 — Mise en ligne (½ journée)
 
-- [ ] GitHub Actions → GitHub Pages (`base-href` correct, fallback `404.html` pour les routes)
-- [ ] Meta SEO + Open Graph image
+- [x] GitHub Actions → GitHub Pages (`base-href` correct, fallback `404.html` pour les routes)
+- [x] Meta SEO + Open Graph image
 - [ ] Lighthouse + test clavier + test lecteur d'écran rapide
 
 ### Phase 6 — Polish (seulement maintenant)
 
-- [ ] Boot animation
-- [ ] Drag des fenêtres, puis resize
-- [ ] Transitions ouverture/fermeture
-- [ ] Easter eggs terminal (`sudo`, `coffee`, `sleep`…)
+- [x] Boot animation
+- [x] Drag des fenêtres
+- [ ] Resize des fenêtres
+- [x] Transitions ouverture/fermeture
+- [x] Easter eggs terminal (`sudo`, `coffee`, `sleep`…)
 - [ ] Bascule FR/EN
 
 ---

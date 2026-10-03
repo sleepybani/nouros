@@ -30,9 +30,24 @@ describe('runCommand', () => {
   });
 
   it('explains unknown commands', () => {
-    expect(runCommand('sudo').lines[0]).toBe(
-      "command not found: sudo. Type 'help' to see the commands.",
+    expect(runCommand('rm -rf /').lines[0]).toBe(
+      "command not found: rm. Type 'help' to see the commands.",
     );
+  });
+
+  describe('easter eggs', () => {
+    it('answers hidden commands', () => {
+      expect(runCommand('sudo make me a sandwich').lines[0]).toContain('Nice try');
+      expect(runCommand('coffee').lines[0]).toContain('Brewing');
+    });
+
+    it('keeps them out of help', () => {
+      const helpText = runCommand('help').lines.join('\n');
+
+      for (const easterEgg of ['sudo', 'coffee', 'sleep', 'hello']) {
+        expect(helpText).not.toContain(easterEgg);
+      }
+    });
   });
 
   it('asks the screen to be cleared', () => {

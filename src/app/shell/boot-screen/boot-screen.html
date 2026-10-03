@@ -1,0 +1,15 @@
+<div class="boot" role="status" aria-label="Starting NourOS">
+  <p class="boot__logo">🌙 NourOS</p>
+  <p class="boot__starting">Starting NourOS…</p>
+
+  <div class="boot__progress" aria-hidden="true"><span class="boot__progress-bar"></span></div>
+
+  <ul class="boot__lines" aria-hidden="true">
+    @for (line of visibleLines(); track line) {
+      <li>{{ line }}</li>
+    }
+  </ul>
+
+  <p class="boot__tagline">{{ tagline }}</p>
+  <p class="boot__hint">Press any key or click to skip</p>
+</div>

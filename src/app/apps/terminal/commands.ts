@@ -11,15 +11,17 @@ export interface CommandResult {
 interface Command {
   description: string;
   run: (args: string[]) => CommandResult;
+  /** Easter eggs: they work, but `help` does not list them. */
+  hidden?: boolean;
 }
 
 const COMMANDS: Record<string, Command> = {
   help: {
     description: 'list available commands',
     run: () => ({
-      lines: Object.entries(COMMANDS).map(
-        ([name, command]) => `${name.padEnd(10)} ${command.description}`,
-      ),
+      lines: Object.entries(COMMANDS)
+        .filter(([, command]) => !command.hidden)
+        .map(([name, command]) => `${name.padEnd(10)} ${command.description}`),
     }),
   },
   whoami: {
@@ -77,6 +79,28 @@ const COMMANDS: Record<string, Command> = {
   clear: {
     description: 'clear the screen',
     run: () => ({ lines: [], clearScreen: true }),
+  },
+  sudo: {
+    description: 'become admin',
+    hidden: true,
+    run: () => ({ lines: ['Nice try. Nour is the only admin here. 😌'] }),
+  },
+  coffee: {
+    description: 'refuel',
+    hidden: true,
+    run: () => ({ lines: ['☕ Brewing… done. Productivity +10, patience +5.'] }),
+  },
+  sleep: {
+    description: 'rest',
+    hidden: true,
+    run: () => ({
+      lines: ['😴 sleepybani mode activated.', '(Yes, that is my GitHub name. Now you know why.)'],
+    }),
+  },
+  hello: {
+    description: 'say hi',
+    hidden: true,
+    run: () => ({ lines: ["Hi! 👋 Type 'help' to explore, or open Mail to say hello for real."] }),
   },
 };
 
