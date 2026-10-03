@@ -1,0 +1,29 @@
+<header class="app-window__titlebar">
+  <div class="app-window__controls">
+    <button
+      type="button"
+      class="app-window__control app-window__control--close"
+      [attr.aria-label]="'Close ' + app().title"
+      (click)="close()"
+    ></button>
+    <button
+      type="button"
+      class="app-window__control app-window__control--minimize"
+      [attr.aria-label]="'Minimize ' + app().title"
+      (click)="minimize()"
+    ></button>
+  </div>
+
+  <h2 class="app-window__title" [id]="titleId()">
+    <img [src]="app().icon" alt="" width="18" height="18" />
+    {{ app().title }}
+  </h2>
+</header>
+
+<div class="app-window__content">
+  @if (appComponent(); as component) {
+    <ng-container *ngComponentOutlet="component; injector: appInjector" />
+  } @else {
+    <p class="app-window__loading">Loading…</p>
+  }
+</div>

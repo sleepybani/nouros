@@ -1,0 +1,35 @@
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  width: 104px;
+  padding: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+
+  &:hover {
+    background: rgb(255 255 255 / 0.06);
+    border-color: var(--color-border);
+  }
+}
+
+.desktop-icon__image {
+  filter: drop-shadow(var(--shadow-soft));
+}
+
+.desktop-icon__title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.desktop-icon__subtitle {
+  margin-top: calc(var(--space-1) * -1);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
