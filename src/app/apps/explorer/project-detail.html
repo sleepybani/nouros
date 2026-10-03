@@ -1,0 +1,54 @@
+<article class="project-detail">
+  <header class="project-detail__header">
+    <h3 class="project-detail__name">{{ project().name }}</h3>
+    <p class="project-detail__tagline">{{ project().tagline }}</p>
+    <p class="project-detail__meta">{{ project().role }} · {{ project().year }}</p>
+  </header>
+
+  <ul class="project-detail__stack" aria-label="Tech stack">
+    @for (technology of project().stack; track technology) {
+      <li class="project-detail__chip">{{ technology }}</li>
+    }
+  </ul>
+
+  <section class="project-detail__section">
+    <h4>📍 Context</h4>
+    <p>{{ project().context }}</p>
+  </section>
+
+  <section class="project-detail__section">
+    <h4>🧩 Problem</h4>
+    <p>{{ project().problem }}</p>
+  </section>
+
+  <section class="project-detail__section">
+    <h4>✨ Solution</h4>
+    <p>{{ project().solution }}</p>
+  </section>
+
+  @if (project().screenshots.length > 0) {
+    <section class="project-detail__section">
+      <h4>🖼️ Screenshots</h4>
+      <div class="project-detail__screenshots">
+        @for (screenshot of project().screenshots; track screenshot; let index = $index) {
+          <img
+            [src]="screenshot"
+            [alt]="project().name + ' screenshot ' + (index + 1)"
+            loading="lazy"
+          />
+        }
+      </div>
+    </section>
+  }
+
+  @if (project().links.live || project().links.repo) {
+    <footer class="project-detail__links">
+      @if (project().links.live; as liveUrl) {
+        <a [href]="liveUrl" target="_blank" rel="noopener">Visit site ↗</a>
+      }
+      @if (project().links.repo; as repoUrl) {
+        <a [href]="repoUrl" target="_blank" rel="noopener">Source code ↗</a>
+      }
+    </footer>
+  }
+</article>

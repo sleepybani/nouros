@@ -1,0 +1,38 @@
+<div class="explorer">
+  <div class="explorer__toolbar">
+    <button
+      type="button"
+      class="explorer__back"
+      [disabled]="!openedSlug()"
+      aria-label="Back to all projects"
+      (click)="backToProjects()"
+    >
+      ←
+    </button>
+    <code class="explorer__path">{{ currentPath() }}</code>
+  </div>
+
+  <div class="explorer__body">
+    @if (!openedSlug()) {
+      <h3 class="explorer__heading">{{ projects.length }} projects</h3>
+      <ul class="explorer__list">
+        @for (project of projects; track project.slug) {
+          <li>
+            <app-project-card [project]="project" (opened)="openProject($event)" />
+          </li>
+        }
+      </ul>
+    } @else if (openedProject(); as project) {
+      <app-project-detail [project]="project" />
+    } @else {
+      <div class="explorer__not-found">
+        <p>
+          📁 File not found: <code>{{ openedSlug() }}</code>
+        </p>
+        <button type="button" class="explorer__link-button" (click)="backToProjects()">
+          See all projects
+        </button>
+      </div>
+    }
+  </div>
+</div>

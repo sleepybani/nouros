@@ -11,7 +11,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'projects',
     placement: 'desktop',
     defaultSize: { width: 780, height: 540 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/explorer/explorer').then((m) => m.Explorer),
   },
   {
     id: 'terminal',
