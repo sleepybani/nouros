@@ -1,0 +1,56 @@
+<div class="notes" [class.notes--reading]="openedSlug()">
+  <nav class="notes__sidebar" aria-label="Notes">
+    <p class="notes__count">{{ notes.length }} {{ notes.length === 1 ? 'note' : 'notes' }}</p>
+    <ul class="notes__list">
+      @for (note of notes; track note.slug) {
+        <li>
+          <button
+            type="button"
+            class="notes__item"
+            [class.notes__item--active]="note.slug === openedSlug()"
+            [attr.aria-current]="note.slug === openedSlug() ? 'page' : null"
+            (click)="openNote(note)"
+          >
+            <span class="notes__item-title">{{ note.title }}</span>
+            <span class="notes__item-meta">
+              {{ note.date | date: 'mediumDate' }} · {{ note.category }}
+            </span>
+          </button>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <section class="notes__reader">
+    @if (openedNote(); as note) {
+      <button type="button" class="notes__back" (click)="backToList()">← All notes</button>
+      <article>
+        <header class="notes__header">
+          <h3 class="notes__title">{{ note.title }}</h3>
+          <p class="notes__meta">
+            <time [attr.datetime]="note.date">{{ note.date | date: 'longDate' }}</time>
+            · {{ note.category }}
+          </p>
+        </header>
+
+        @switch (content().state) {
+          @case ('loading') {
+            <p class="notes__status">Opening note…</p>
+          }
+          @case ('error') {
+            <p class="notes__status" role="alert">This note could not be loaded. 😕</p>
+          }
+          @case ('loaded') {
+            <div class="prose" [innerHTML]="noteHtml()"></div>
+          }
+        }
+      </article>
+    } @else if (openedSlug()) {
+      <p class="notes__status">
+        📝 Note not found: <code>{{ openedSlug() }}</code>
+      </p>
+    } @else {
+      <p class="notes__status notes__status--empty">← Pick a note to read it.</p>
+    }
+  </section>
+</div>
