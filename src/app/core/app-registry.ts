@@ -71,7 +71,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'trash',
     placement: 'corner',
     defaultSize: { width: 640, height: 500 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/trash/trash').then((m) => m.Trash),
   },
   {
     id: 'cv',
