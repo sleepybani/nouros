@@ -1,7 +1,5 @@
 import { AppId, OsApp } from './os-app';
 
-const loadComingSoon = () => import('../apps/coming-soon/coming-soon').then((m) => m.ComingSoon);
-
 export const OS_APPS: readonly OsApp[] = [
   {
     id: 'explorer',
@@ -51,7 +49,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'paint',
     placement: 'desktop',
     defaultSize: { width: 780, height: 560 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/paint/paint').then((m) => m.Paint),
   },
   {
     id: 'games',
@@ -61,7 +59,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'games',
     placement: 'desktop',
     defaultSize: { width: 560, height: 460 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/games/games').then((m) => m.Games),
   },
   {
     id: 'trash',
