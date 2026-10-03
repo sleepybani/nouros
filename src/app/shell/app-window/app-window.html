@@ -1,4 +1,10 @@
-<header class="app-window__titlebar">
+<header
+  class="app-window__titlebar"
+  (pointerdown)="startDrag($event)"
+  (pointermove)="drag($event)"
+  (pointerup)="endDrag()"
+  (pointercancel)="endDrag()"
+>
   <div class="app-window__controls">
     <button
       type="button"

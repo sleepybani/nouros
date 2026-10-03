@@ -65,4 +65,37 @@ describe('Desktop', () => {
     expect(TestBed.inject(Router).url).toBe('/terminal');
     expect(openWindowTitles()).toEqual(['Terminal']);
   });
+
+  it('moves a window when its title bar is dragged', async () => {
+    await harness.navigateByUrl('/terminal');
+    const start = windowManager.windows()[0];
+    const titlebar = page().querySelector<HTMLElement>('.app-window__titlebar')!;
+
+    titlebar.dispatchEvent(
+      new MouseEvent('pointerdown', { button: 0, clientX: 200, clientY: 60, bubbles: true }),
+    );
+    titlebar.dispatchEvent(
+      new MouseEvent('pointermove', { clientX: 300, clientY: 160, bubbles: true }),
+    );
+    titlebar.dispatchEvent(new MouseEvent('pointerup', { bubbles: true }));
+
+    const moved = windowManager.windows()[0];
+    expect(moved.x).toBe(start.x + 100);
+    expect(moved.y).toBe(start.y + 100);
+  });
+
+  it('never drags a window off screen', async () => {
+    await harness.navigateByUrl('/terminal');
+    const titlebar = page().querySelector<HTMLElement>('.app-window__titlebar')!;
+
+    titlebar.dispatchEvent(
+      new MouseEvent('pointerdown', { button: 0, clientX: 200, clientY: 60, bubbles: true }),
+    );
+    titlebar.dispatchEvent(
+      new MouseEvent('pointermove', { clientX: -5000, clientY: -5000, bubbles: true }),
+    );
+
+    expect(windowManager.windows()[0].x).toBe(0);
+    expect(windowManager.windows()[0].y).toBe(0);
+  });
 });
