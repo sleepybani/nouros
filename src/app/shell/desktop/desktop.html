@@ -1,0 +1,19 @@
+<main class="desktop">
+  <h1 class="visually-hidden">NourOS desktop</h1>
+
+  <nav class="desktop__icons" aria-label="Apps">
+    @for (app of desktopApps; track app.id) {
+      <app-desktop-icon [app]="app" />
+    }
+  </nav>
+
+  <nav class="desktop__corner" aria-label="System">
+    @for (app of cornerApps; track app.id) {
+      <app-desktop-icon [app]="app" />
+    }
+  </nav>
+
+  @for (appWindow of windowManager.windows(); track appWindow.appId) {
+    <app-window [state]="appWindow" />
+  }
+</main>
