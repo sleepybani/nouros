@@ -12,6 +12,8 @@ Portfolio de Nour sous forme de faux système d'exploitation : un bureau, des ic
 - 🎮 **Games** — personnalité
 - 🗑️ **Trash** — bugs I survived
 
+🌐 **En ligne** : https://sleepybani.github.io/nouros/
+
 Plan détaillé : [docs/PLAN.md](docs/PLAN.md)
 
 ## Stack
@@ -39,5 +41,12 @@ Puis ouvrir http://localhost:4300 (port 4300 pour ne pas entrer en conflit avec 
 | `npm run format`       | Formate tout le code (Prettier)          |
 | `npm run format:check` | Vérifie le formatage sans modifier       |
 | `npm run build`        | Build de production dans `dist/`         |
+| `npm run build:pages`  | Build pour GitHub Pages (`/nouros/`)     |
 
 La CI lance `format:check`, `lint`, `test` et `build` sur chaque PR.
+
+## Déploiement
+
+Chaque push sur `main` déploie sur GitHub Pages (workflow `.github/workflows/deploy.yml`).
+
+À faire **une seule fois** : repo → **Settings → Pages → Source : GitHub Actions**.
