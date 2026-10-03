@@ -1,0 +1,53 @@
+:root {
+  color-scheme: dark;
+
+  --color-bg: #14121f;
+  --color-surface: #1f1c2e;
+  --color-surface-raised: #2a2640;
+  --color-border: #3a3557;
+  --color-text: #ece8f6;
+  --color-text-muted: #a39cbd;
+
+  --color-pink: #f5b8d0;
+  --color-lavender: #c7b8f5;
+  --color-mint: #b8f0dc;
+  --color-peach: #f8d1b0;
+  --color-sky: #b8dcf5;
+
+  --color-accent: var(--color-lavender);
+  --color-link: var(--color-sky);
+  --color-success: var(--color-mint);
+  --color-warning: var(--color-peach);
+  --color-danger: var(--color-pink);
+
+  --desktop-background:
+    radial-gradient(circle at 15% 20%, rgb(199 184 245 / 0.18), transparent 40%),
+    radial-gradient(circle at 85% 75%, rgb(245 184 208 / 0.14), transparent 45%),
+    radial-gradient(circle at 60% 10%, rgb(184 220 245 / 0.1), transparent 35%), var(--color-bg);
+
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-window: 0 20px 50px rgb(0 0 0 / 0.45), 0 0 0 1px var(--color-border);
+  --shadow-soft: 0 6px 18px rgb(0 0 0 / 0.3);
+
+  --focus-ring: 0 0 0 3px var(--color-accent);
+
+  --taskbar-height: 48px;
+}
