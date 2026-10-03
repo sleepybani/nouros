@@ -1,0 +1,83 @@
+<article class="cv printable">
+  <div class="cv__actions">
+    @if (cv.pdfUrl) {
+      <a class="cv__button" [href]="cv.pdfUrl" download>⬇ Download PDF</a>
+    }
+    <button type="button" class="cv__button cv__button--secondary" (click)="print()">
+      🖨 Print / Save as PDF
+    </button>
+  </div>
+
+  <header class="cv__header">
+    <h3 class="cv__name">{{ profile.name }}</h3>
+    <p class="cv__headline">{{ cv.headline }}</p>
+    <p class="cv__contact">
+      {{ profile.location }} ·
+      <a [href]="profile.links.github" target="_blank" rel="noopener">{{ profile.links.github }}</a>
+      @if (profile.links.linkedin) {
+        · <a [href]="profile.links.linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      }
+    </p>
+  </header>
+
+  <section class="cv__section">
+    <h4>Profile</h4>
+    <p>{{ cv.summary }}</p>
+  </section>
+
+  @if (cv.experience.length > 0) {
+    <section class="cv__section">
+      <h4>Experience</h4>
+      @for (entry of cv.experience; track entry.title + entry.place) {
+        <div class="cv__entry">
+          <p class="cv__entry-title">
+            <strong>{{ entry.title }}</strong> — {{ entry.place }}
+            <span class="cv__period">{{ entry.period }}</span>
+          </p>
+          <p>{{ entry.description }}</p>
+        </div>
+      }
+    </section>
+  }
+
+  <section class="cv__section">
+    <h4>Skills</h4>
+    <dl class="cv__skills">
+      @for (group of skillGroups; track group.name) {
+        <dt>{{ group.name }}</dt>
+        <dd>{{ group.skills.join(' · ') }}</dd>
+      }
+    </dl>
+  </section>
+
+  <section class="cv__section">
+    <h4>Selected projects</h4>
+    <ul class="cv__projects">
+      @for (project of projects; track project.slug) {
+        <li>
+          <strong>{{ project.name }}</strong> — {{ project.tagline }}
+        </li>
+      }
+    </ul>
+  </section>
+
+  @if (cv.education.length > 0) {
+    <section class="cv__section">
+      <h4>Education</h4>
+      @for (entry of cv.education; track entry.title + entry.place) {
+        <div class="cv__entry">
+          <p class="cv__entry-title">
+            <strong>{{ entry.title }}</strong> — {{ entry.place }}
+            <span class="cv__period">{{ entry.period }}</span>
+          </p>
+          <p>{{ entry.description }}</p>
+        </div>
+      }
+    </section>
+  }
+
+  <section class="cv__section">
+    <h4>Languages</h4>
+    <p>{{ cv.languages.join(' · ') }}</p>
+  </section>
+</article>

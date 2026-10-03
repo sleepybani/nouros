@@ -31,7 +31,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'contact',
     placement: 'desktop',
     defaultSize: { width: 580, height: 540 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/mail/mail').then((m) => m.Mail),
   },
   {
     id: 'notes',
@@ -81,7 +81,7 @@ export const OS_APPS: readonly OsApp[] = [
     route: 'cv',
     placement: 'taskbar',
     defaultSize: { width: 700, height: 620 },
-    loadComponent: loadComingSoon,
+    loadComponent: () => import('../apps/cv/quick-cv').then((m) => m.QuickCv),
   },
 ];
 

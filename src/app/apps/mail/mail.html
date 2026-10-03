@@ -1,0 +1,73 @@
+<div class="mail">
+  <aside class="mail__sidebar">
+    <p class="mail__folder mail__folder--active">✉️ New message</p>
+    <p class="mail__sidebar-title">Find me on</p>
+    <ul class="mail__links">
+      <li><a [href]="profile.links.github" target="_blank" rel="noopener">GitHub ↗</a></li>
+      @if (profile.links.linkedin) {
+        <li><a [href]="profile.links.linkedin" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      }
+    </ul>
+  </aside>
+
+  <section class="mail__compose">
+    @if (status() === 'sent') {
+      <div class="mail__result" role="status">
+        <p class="mail__result-emoji" aria-hidden="true">💌</p>
+        <p><strong>Message sent!</strong> Thanks, I'll get back to you soon.</p>
+        <button type="button" class="mail__button" (click)="status.set('idle')">
+          Write another one
+        </button>
+      </div>
+    } @else {
+      <form class="mail__form" [formGroup]="form" (ngSubmit)="send()" novalidate>
+        <p class="mail__to"><span>To:</span> {{ profile.name }}</p>
+
+        @if (!canSend) {
+          <p class="mail__hint" role="note">
+            🚧 The contact form is not plugged in yet. Reach me on GitHub in the meantime!
+          </p>
+        }
+
+        <label class="mail__field">
+          <span>Your name</span>
+          <input formControlName="name" autocomplete="name" />
+          @if (showError('name')) {
+            <small class="mail__error">Please tell me your name.</small>
+          }
+        </label>
+
+        <label class="mail__field">
+          <span>Your email</span>
+          <input type="email" formControlName="email" autocomplete="email" />
+          @if (showError('email')) {
+            <small class="mail__error">I need a valid email to answer you.</small>
+          }
+        </label>
+
+        <label class="mail__field">
+          <span>Subject <em>(optional)</em></span>
+          <input formControlName="subject" />
+        </label>
+
+        <label class="mail__field mail__field--grow">
+          <span>Message</span>
+          <textarea formControlName="message" rows="6"></textarea>
+          @if (showError('message')) {
+            <small class="mail__error">A few more words please (10 characters min).</small>
+          }
+        </label>
+
+        @if (status() === 'error') {
+          <p class="mail__error" role="alert">
+            Oops, the message could not be sent. Please try again or reach me on GitHub.
+          </p>
+        }
+
+        <button type="submit" class="mail__button" [disabled]="!canSend || status() === 'sending'">
+          {{ status() === 'sending' ? 'Sending…' : 'Send message to Nour' }}
+        </button>
+      </form>
+    }
+  </section>
+</div>
