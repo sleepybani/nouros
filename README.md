@@ -27,7 +27,7 @@ npm install
 npm start
 ```
 
-Puis ouvrir http://localhost:4200.
+Puis ouvrir http://localhost:4300 (port 4300 pour ne pas entrer en conflit avec une autre app sur 4200).
 
 ## Commandes
 
