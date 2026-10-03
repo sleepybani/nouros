@@ -12,6 +12,32 @@ Portfolio de Nour sous forme de faux système d'exploitation : un bureau, des ic
 - 🎮 **Games** — personnalité
 - 🗑️ **Trash** — bugs I survived
 
-Stack : Angular · SCSS · GitHub Pages.
-
 Plan détaillé : [docs/PLAN.md](docs/PLAN.md)
+
+## Stack
+
+Angular 21 (standalone + signals) · SCSS · Vitest · ESLint · Prettier · GitHub Actions
+
+## Lancer le projet
+
+Prérequis : Node `^20.19` ou `^22.12` ou `>=24`.
+
+```bash
+npm install
+npm start
+```
+
+Puis ouvrir http://localhost:4300 (port 4300 pour ne pas entrer en conflit avec une autre app sur 4200).
+
+## Commandes
+
+| Commande               | Ce que ça fait                           |
+| ---------------------- | ---------------------------------------- |
+| `npm start`            | Serveur de dev avec rechargement auto    |
+| `npm test`             | Tests unitaires (Vitest)                 |
+| `npm run lint`         | Vérifie le code (ESLint + accessibilité) |
+| `npm run format`       | Formate tout le code (Prettier)          |
+| `npm run format:check` | Vérifie le formatage sans modifier       |
+| `npm run build`        | Build de production dans `dist/`         |
+
+La CI lance `format:check`, `lint`, `test` et `build` sur chaque PR.

@@ -8,13 +8,13 @@ Portfolio sous forme de faux système d'exploitation. On arrive sur un bureau, c
 
 ## 1. Objectifs
 
-| Objectif | Mesure de réussite |
-|---|---|
-| Montrer le profil dev (full-stack JS, Angular/Nest) | Un recruteur trouve projets + stack en < 30 s |
-| Montrer le côté créatif / humain | Paint, Notes, Games accessibles mais pas envahissants |
-| Rester pro malgré le concept | Bouton **Quick CV** toujours visible, PDF téléchargeable |
-| Mobile propre | Version cards dédiée, pas un desktop écrasé |
-| Rapide et accessible | Lighthouse ≥ 90 (perf, a11y, SEO), navigation clavier |
+| Objectif                                            | Mesure de réussite                                       |
+| --------------------------------------------------- | -------------------------------------------------------- |
+| Montrer le profil dev (full-stack JS, Angular/Nest) | Un recruteur trouve projets + stack en < 30 s            |
+| Montrer le côté créatif / humain                    | Paint, Notes, Games accessibles mais pas envahissants    |
+| Rester pro malgré le concept                        | Bouton **Quick CV** toujours visible, PDF téléchargeable |
+| Mobile propre                                       | Version cards dédiée, pas un desktop écrasé              |
+| Rapide et accessible                                | Lighthouse ≥ 90 (perf, a11y, SEO), navigation clavier    |
 
 **Règle d'or :** pas d'animations avant que tout le contenu soit en place.
 
@@ -22,15 +22,15 @@ Portfolio sous forme de faux système d'exploitation. On arrive sur un bureau, c
 
 ## 2. Stack technique
 
-| Couche | Choix | Pourquoi |
-|---|---|---|
-| Framework | Angular (dernière stable), standalone components, signals | Colle au profil |
-| Style | SCSS + CSS custom properties (design tokens) | Thème dark/pastel simple à ajuster |
-| Contenu | Fichiers TS/JSON dans `src/app/data/` (projets, bugs, skills) | Pas de backend nécessaire |
-| Articles | Markdown dans `src/content/notes/*.md` (+ `ngx-markdown` plus tard) | Écrire facilement |
-| Contact | Formspree (ou `mailto:` en v1) | Pas de serveur |
-| Déploiement | GitHub Pages via GitHub Actions | Gratuit, lié à la repo |
-| Qualité | ESLint, Prettier, tests unitaires sur le `WindowManagerService` | La logique fenêtres est le cœur |
+| Couche      | Choix                                                               | Pourquoi                           |
+| ----------- | ------------------------------------------------------------------- | ---------------------------------- |
+| Framework   | Angular (dernière stable), standalone components, signals           | Colle au profil                    |
+| Style       | SCSS + CSS custom properties (design tokens)                        | Thème dark/pastel simple à ajuster |
+| Contenu     | Fichiers TS/JSON dans `src/app/data/` (projets, bugs, skills)       | Pas de backend nécessaire          |
+| Articles    | Markdown dans `src/content/notes/*.md` (+ `ngx-markdown` plus tard) | Écrire facilement                  |
+| Contact     | Formspree (ou `mailto:` en v1)                                      | Pas de serveur                     |
+| Déploiement | GitHub Pages via GitHub Actions                                     | Gratuit, lié à la repo             |
+| Qualité     | ESLint, Prettier, tests unitaires sur le `WindowManagerService`     | La logique fenêtres est le cœur    |
 
 ---
 
@@ -38,15 +38,15 @@ Portfolio sous forme de faux système d'exploitation. On arrive sur un bureau, c
 
 Le texte dit « 6 icônes max ». Proposition : **6 icônes sur le bureau** + la **Corbeille** en bas à droite (comme un vrai OS), donc elle ne charge pas visuellement.
 
-| Icône | App | Contenu | Priorité |
-|---|---|---|---|
-| 🗂️ | **Explorer** — Projects | EV-ON, Atelier des Jasmins, Evento, KC Media, chatbot ATI. Chaque projet : contexte, stack, problème, solution, screenshots, liens | P0 |
-| 🖥️ | **Terminal** — Who am I? | `whoami`, `skills`, `projects`, `contact`, `funfacts`, `help`, `clear` | P0 |
-| 📨 | **Mail** — Contact | Faux client mail, formulaire « Send message to Nour » + liens LinkedIn/GitHub | P0 |
-| 📝 | **Notes** — Blog | Liste d'articles (dev, art, apprentissage, femmes en tech, expériences) | P1 |
-| 🎨 | **Paint.exe** — Creative side | Galerie peintures + réflexions artistiques | P1 |
-| 🎮 | **Games** — Personality | League, gaming, danse, art, hobbies (court) | P2 |
-| 🗑️ | **Trash** — Bugs I survived | « GCP access denied », « npm blocked by corporate network », « Angular component from hell »… format : symptôme → cause → fix → leçon | P1 |
+| Icône | App                           | Contenu                                                                                                                               | Priorité |
+| ----- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 🗂️    | **Explorer** — Projects       | EV-ON, Atelier des Jasmins, Evento, KC Media, chatbot ATI. Chaque projet : contexte, stack, problème, solution, screenshots, liens    | P0       |
+| 🖥️    | **Terminal** — Who am I?      | `whoami`, `skills`, `projects`, `contact`, `funfacts`, `help`, `clear`                                                                | P0       |
+| 📨    | **Mail** — Contact            | Faux client mail, formulaire « Send message to Nour » + liens LinkedIn/GitHub                                                         | P0       |
+| 📝    | **Notes** — Blog              | Liste d'articles (dev, art, apprentissage, femmes en tech, expériences)                                                               | P1       |
+| 🎨    | **Paint.exe** — Creative side | Galerie peintures + réflexions artistiques                                                                                            | P1       |
+| 🎮    | **Games** — Personality       | League, gaming, danse, art, hobbies (court)                                                                                           | P2       |
+| 🗑️    | **Trash** — Bugs I survived   | « GCP access denied », « npm blocked by corporate network », « Angular component from hell »… format : symptôme → cause → fix → leçon | P1       |
 
 Toujours visible (hors icônes) : **Quick CV** (bouton dans la taskbar ou en haut à droite → fenêtre CV + téléchargement PDF).
 
@@ -55,6 +55,7 @@ Toujours visible (hors icônes) : **Quick CV** (bouton dans la taskbar ou en hau
 ## 4. Expérience utilisateur
 
 ### Desktop (≥ 1024 px)
+
 1. **Boot** court (≤ 2 s, skippable au clic / touche, sauté si déjà vu via `sessionStorage`) : « Starting NourOS… »
 2. **Bureau** : fond dark dreamy, icônes en grille à gauche, widget « Today's reminder » à droite.
 3. **Fenêtres** : ouvrir, fermer, minimiser, focus (z-index), drag (P1), resize (P2).
@@ -65,22 +66,27 @@ Toujours visible (hors icônes) : **Quick CV** (bouton dans la taskbar ou en hau
    - **Quick CV**
 
 ### Tablette (768–1023 px)
+
 Bureau conservé, mais fenêtres en plein écran (pas de drag).
 
 ### Mobile (< 768 px)
+
 Pas de faux desktop. Écran d'accueil type « launcher » :
+
 - header NourOS + phrase d'accroche
 - grille de **cards** (une par app) → ouvre une page plein écran avec bouton retour
 - Quick CV en bouton fixe
 - statuts taskbar affichés en petit bloc sous le header
 
 ### Accessibilité
+
 - Icônes = `<button>` avec label, navigables au clavier (Tab / Entrée / flèches)
 - Fenêtre = `role="dialog"`, focus piégé, `Échap` ferme
 - `prefers-reduced-motion` respecté (boot + animations désactivés)
 - Contraste pastel sur dark vérifié (AA minimum)
 
 ### Routing / deep links
+
 Chaque fenêtre a une URL : `/projects`, `/projects/ev-on`, `/terminal`, `/notes/:slug`… Sur desktop, la route ouvre la fenêtre sur le bureau ; sur mobile, elle affiche la page. Partager un lien vers un projet doit marcher.
 
 ---
@@ -130,7 +136,7 @@ src/app/
 interface OsApp {
   id: 'explorer' | 'terminal' | 'mail' | 'notes' | 'paint' | 'games' | 'trash' | 'cv';
   title: string;
-  icon: string;               // chemin SVG
+  icon: string; // chemin SVG
   route: string;
   component: () => Promise<Type<unknown>>; // lazy load
   defaultSize: { w: number; h: number };
@@ -139,7 +145,10 @@ interface OsApp {
 interface WindowState {
   appId: OsApp['id'];
   params?: Record<string, string>; // ex. { slug: 'ev-on' }
-  x: number; y: number; w: number; h: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
   z: number;
   minimized: boolean;
 }
@@ -159,7 +168,7 @@ interface Project {
 }
 
 interface SurvivedBug {
-  title: string;      // "npm blocked by corporate network"
+  title: string; // "npm blocked by corporate network"
   symptom: string;
   cause: string;
   fix: string;
@@ -178,19 +187,19 @@ Vibe : **dark desktop + icônes pastel + dreamy + tech girl + chaos créatif ma�
 
 Tokens de départ (à ajuster sur Figma) :
 
-| Token | Valeur | Usage |
-|---|---|---|
-| `--bg` | `#14121f` | fond bureau |
-| `--bg-glow` | dégradé radial violet/bleu nuit | ambiance « dreamy » |
-| `--surface` | `#1f1c2e` | fenêtres |
-| `--surface-2` | `#2a2640` | barre de titre |
-| `--text` | `#ece8f6` | texte |
-| `--muted` | `#a39cbd` | texte secondaire |
-| `--pink` | `#f5b8d0` | accent |
-| `--lavender` | `#c7b8f5` | accent |
-| `--mint` | `#b8f0dc` | succès / terminal |
-| `--peach` | `#f8d1b0` | warning |
-| `--sky` | `#b8dcf5` | liens |
+| Token         | Valeur                          | Usage               |
+| ------------- | ------------------------------- | ------------------- |
+| `--bg`        | `#14121f`                       | fond bureau         |
+| `--bg-glow`   | dégradé radial violet/bleu nuit | ambiance « dreamy » |
+| `--surface`   | `#1f1c2e`                       | fenêtres            |
+| `--surface-2` | `#2a2640`                       | barre de titre      |
+| `--text`      | `#ece8f6`                       | texte               |
+| `--muted`     | `#a39cbd`                       | texte secondaire    |
+| `--pink`      | `#f5b8d0`                       | accent              |
+| `--lavender`  | `#c7b8f5`                       | accent              |
+| `--mint`      | `#b8f0dc`                       | succès / terminal   |
+| `--peach`     | `#f8d1b0`                       | warning             |
+| `--sky`       | `#b8dcf5`                       | liens               |
 
 - Typo : une sans-serif douce (ex. Inter / Nunito) + une mono pour le terminal (JetBrains Mono)
 - Fenêtres arrondies (12 px), ombre douce, barre de titre avec 3 pastilles pastel
@@ -201,12 +210,14 @@ Tokens de départ (à ajuster sur Figma) :
 ## 7. Feuille de route
 
 ### Phase 0 — Préparation (½ journée)
+
 - [ ] Créer la repo GitHub `nouros`
 - [ ] Maquette papier/Figma : bureau desktop + 1 fenêtre + écran mobile
 - [ ] Valider les 6 icônes + Corbeille
 - [ ] Rassembler le contenu brut : textes projets, screenshots, CV PDF, 3–5 bugs, 3–6 peintures
 
 ### Phase 1 — Squelette (1–2 jours)
+
 - [ ] `ng new` (standalone, SCSS, routing), ESLint + Prettier
 - [ ] Design tokens + fond du bureau
 - [ ] `app-registry` + `WindowManagerService` (open/close/focus/minimize) + tests
@@ -214,12 +225,14 @@ Tokens de départ (à ajuster sur Figma) :
 - [ ] `TaskbarComponent` avec statuts + horloge + Quick CV
 
 ### Phase 2 — Contenu P0 (2–3 jours)
+
 - [ ] Explorer : liste projets + détail projet (5 projets)
 - [ ] Terminal : saisie, historique (↑/↓), commandes `help whoami skills projects contact funfacts clear`
 - [ ] Mail : formulaire + liens
 - [ ] Quick CV : fenêtre + PDF
 
 ### Phase 3 — Mobile (1–2 jours)
+
 - [ ] `BreakpointService` + `MobileLauncherComponent` (cards)
 - [ ] Routes partagées desktop/mobile (deep links)
 - [ ] Test sur vrai téléphone
@@ -227,6 +240,7 @@ Tokens de départ (à ajuster sur Figma) :
 > Mobile avant P1 volontairement : un recruteur ouvre souvent le lien sur téléphone.
 
 ### Phase 4 — Contenu P1/P2 (2–3 jours)
+
 - [ ] Trash (bugs survived)
 - [ ] Notes (articles Markdown)
 - [ ] Paint.exe (galerie)
@@ -234,11 +248,13 @@ Tokens de départ (à ajuster sur Figma) :
 - [ ] Widget « Today's reminder » (rotation aléatoire)
 
 ### Phase 5 — Mise en ligne (½ journée)
+
 - [ ] GitHub Actions → GitHub Pages (`base-href` correct, fallback `404.html` pour les routes)
 - [ ] Meta SEO + Open Graph image
 - [ ] Lighthouse + test clavier + test lecteur d'écran rapide
 
 ### Phase 6 — Polish (seulement maintenant)
+
 - [ ] Boot animation
 - [ ] Drag des fenêtres, puis resize
 - [ ] Transitions ouverture/fermeture
