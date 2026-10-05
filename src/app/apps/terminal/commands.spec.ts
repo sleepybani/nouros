@@ -2,7 +2,7 @@ import { runCommand } from './commands';
 
 describe('runCommand', () => {
   it('introduces Nour with whoami', () => {
-    expect(runCommand('whoami').lines[0]).toContain('full-stack JS developer');
+    expect(runCommand('whoami').lines[0]).toContain('full-stack JavaScript engineer');
   });
 
   it('lists every command in help', () => {

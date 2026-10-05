@@ -42,10 +42,10 @@ describe('Desktop', () => {
   });
 
   it('opens the right window from a deep link', async () => {
-    await harness.navigateByUrl('/projects/ev-on');
+    await harness.navigateByUrl('/projects/evo-on');
 
     expect(windowManager.focusedWindow()?.appId).toBe('explorer');
-    expect(windowManager.focusedWindow()?.params).toEqual({ slug: 'ev-on' });
+    expect(windowManager.focusedWindow()?.params).toEqual({ slug: 'evo-on' });
   });
 
   it('redirects unknown URLs to the desktop', async () => {

@@ -28,7 +28,7 @@ const COMMANDS: Record<string, Command> = {
     description: 'who is Nour?',
     run: () => ({
       lines: [
-        `${PROFILE.name} — full-stack JS developer, creative builder, problem solver.`,
+        `${PROFILE.fullName} — full-stack JavaScript engineer, tech lead, mentor and creative builder.`,
         `Based in ${PROFILE.location}.`,
         "Type 'help' to see what else you can ask.",
       ],
@@ -37,14 +37,14 @@ const COMMANDS: Record<string, Command> = {
   skills: {
     description: 'what I work with',
     run: () => ({
-      lines: SKILL_GROUPS.map((group) => `${group.name.padEnd(10)} ${group.skills.join(', ')}`),
+      lines: SKILL_GROUPS.map((group) => `${group.name.padEnd(14)} ${group.skills.join(', ')}`),
     }),
   },
   projects: {
     description: 'list my projects',
     run: () => ({
       lines: [
-        ...PROJECTS.map((project) => `${project.slug.padEnd(22)} ${project.tagline}`),
+        ...PROJECTS.map((project) => `${project.slug.padEnd(26)} ${project.tagline}`),
         '',
         "Type 'open <name>' to open one, e.g. 'open kc-media'.",
       ],

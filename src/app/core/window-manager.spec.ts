@@ -36,11 +36,11 @@ describe('WindowManager', () => {
     it('does not duplicate an already open window, but focuses it with the new params', () => {
       windowManager.open('explorer');
       windowManager.open('mail');
-      windowManager.open('explorer', { slug: 'ev-on' });
+      windowManager.open('explorer', { slug: 'evo-on' });
 
       expect(windowManager.windows()).toHaveLength(2);
       expect(windowManager.focusedWindow()?.appId).toBe('explorer');
-      expect(windowManager.focusedWindow()?.params).toEqual({ slug: 'ev-on' });
+      expect(windowManager.focusedWindow()?.params).toEqual({ slug: 'evo-on' });
     });
 
     it('restores a minimized window', () => {

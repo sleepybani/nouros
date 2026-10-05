@@ -5,13 +5,14 @@ export interface TaskbarStatus {
 
 export const PROFILE = {
   name: 'Nour',
-  role: 'Full-stack JS developer',
+  fullName: 'Nour Khedher',
+  role: 'Full-stack JavaScript engineer',
   tagline:
     'Welcome to NourOS — a tiny operating system built with code, color, caffeine, and controlled chaos.',
   location: 'Strasbourg / Reichstett',
   links: {
     github: 'https://github.com/sleepybani',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/khedhernour/',
     email: '',
   },
   /** Formspree (or similar) endpoint, e.g. https://formspree.io/f/abcd1234. Empty = mailto fallback. */

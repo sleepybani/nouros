@@ -42,7 +42,16 @@ export const HOBBIES: readonly Hobby[] = [
     name: 'League of Legends',
     description: 'Strategy, teamwork and a lot of "one last game".',
   },
-  { emoji: '🕹️', name: 'Gaming', description: 'Cozy games, story games, anything with good UI.' },
-  { emoji: '💃', name: 'Dance', description: 'The best way to reset my brain after debugging.' },
+  {
+    emoji: '💃',
+    name: 'Dance & yoga',
+    description: 'The best way to reset my brain after debugging.',
+  },
   { emoji: '🎨', name: 'Painting', description: 'Colors first, rules later. See Paint.exe.' },
+  { emoji: '✈️', name: 'Travel', description: 'New places, new colors, new ideas.' },
+  {
+    emoji: '🤝',
+    name: 'Diversity & ethical AI',
+    description: 'Tech is better when everyone can build it and trust it.',
+  },
 ];
