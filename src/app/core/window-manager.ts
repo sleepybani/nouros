@@ -11,11 +11,14 @@ export interface WindowState {
   height: number;
   zIndex: number;
   minimized: boolean;
+  maximized: boolean;
 }
 
 const CASCADE_START = { x: 140, y: 40 };
 const CASCADE_STEP = 32;
 const CASCADE_LENGTH = 6;
+
+export const MIN_WINDOW_SIZE = { width: 320, height: 220 };
 
 @Injectable({ providedIn: 'root' })
 export class WindowManager {
@@ -63,6 +66,7 @@ export class WindowManager {
       height,
       zIndex: this.nextZIndex(),
       minimized: false,
+      maximized: false,
     };
     this.windowList.update((windows) => [...windows, newWindow]);
   }
@@ -93,6 +97,21 @@ export class WindowManager {
 
   moveTo(appId: AppId, x: number, y: number): void {
     this.updateWindow(appId, { x, y });
+  }
+
+  /** Never smaller than MIN_WINDOW_SIZE, so the title bar and buttons always fit. */
+  resize(appId: AppId, width: number, height: number): void {
+    this.updateWindow(appId, {
+      width: Math.max(width, MIN_WINDOW_SIZE.width),
+      height: Math.max(height, MIN_WINDOW_SIZE.height),
+    });
+  }
+
+  toggleMaximize(appId: AppId): void {
+    const appWindow = this.windowList().find((candidate) => candidate.appId === appId);
+    if (appWindow) {
+      this.updateWindow(appId, { maximized: !appWindow.maximized });
+    }
   }
 
   private nextZIndex(): number {
