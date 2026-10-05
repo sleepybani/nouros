@@ -14,6 +14,9 @@
             <span class="notes__item-title">{{ note.title }}</span>
             <span class="notes__item-meta">
               {{ note.date | date: 'mediumDate' }} · {{ note.category }}
+              @if (note.externalUrl) {
+                · ↗ {{ hostOf(note.externalUrl) }}
+              }
             </span>
           </button>
         </li>
@@ -30,18 +33,36 @@
           <p class="notes__meta">
             <time [attr.datetime]="note.date">{{ note.date | date: 'longDate' }}</time>
             · {{ note.category }}
+            @if (note.language === 'fr') {
+              · in French
+            }
           </p>
+          <app-note-share [note]="note" />
         </header>
 
-        @switch (content().state) {
-          @case ('loading') {
-            <p class="notes__status">Opening note…</p>
-          }
-          @case ('error') {
-            <p class="notes__status" role="alert">This note could not be loaded. 😕</p>
-          }
-          @case ('loaded') {
-            <div class="prose" [innerHTML]="noteHtml()"></div>
+        @if (note.externalUrl) {
+          <div class="notes__external">
+            <p class="prose">{{ note.summary }}</p>
+            <a
+              class="notes__external-link"
+              [href]="note.externalUrl"
+              target="_blank"
+              rel="noopener"
+            >
+              Read on {{ hostOf(note.externalUrl) }} ↗
+            </a>
+          </div>
+        } @else {
+          @switch (content().state) {
+            @case ('loading') {
+              <p class="notes__status">Opening note…</p>
+            }
+            @case ('error') {
+              <p class="notes__status" role="alert">This note could not be loaded. 😕</p>
+            }
+            @case ('loaded') {
+              <div class="prose" [innerHTML]="noteHtml()"></div>
+            }
           }
         }
       </article>

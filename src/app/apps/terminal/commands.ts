@@ -1,3 +1,4 @@
+import { buildNewArticleUrl } from '../../data/notes';
 import { PROFILE } from '../../data/profile';
 import { PROJECTS, findProjectBySlug } from '../../data/projects';
 import { FUN_FACTS, SKILL_GROUPS } from '../../data/skills';
@@ -6,6 +7,7 @@ export interface CommandResult {
   lines: readonly string[];
   clearScreen?: boolean;
   projectToOpen?: string;
+  urlToOpen?: string;
 }
 
 interface Command {
@@ -95,6 +97,17 @@ const COMMANDS: Record<string, Command> = {
     hidden: true,
     run: () => ({
       lines: ['😴 sleepybani mode activated.', '(Yes, that is my GitHub name. Now you know why.)'],
+    }),
+  },
+  write: {
+    description: 'write a new article (Nour only)',
+    hidden: true,
+    run: () => ({
+      lines: [
+        '✍️ Opening the article editor on GitHub…',
+        'Save it, merge the pull request, and it is online.',
+      ],
+      urlToOpen: buildNewArticleUrl(new Date()),
     }),
   },
   hello: {

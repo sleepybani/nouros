@@ -83,6 +83,9 @@ export class Terminal {
     if (result.projectToOpen) {
       this.launcher.launch(findAppById('explorer'), result.projectToOpen);
     }
+    if (result.urlToOpen) {
+      window.open(result.urlToOpen, '_blank', 'noopener');
+    }
   }
 
   private moveInHistory(step: number): void {

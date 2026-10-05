@@ -16,6 +16,8 @@ Portfolio de Nour sous forme de faux système d'exploitation : un bureau, des ic
 
 Plan détaillé : [docs/PLAN.md](docs/PLAN.md)
 
+✍️ Écrire un article : [docs/WRITING.md](docs/WRITING.md)
+
 ## Stack
 
 Angular 21 (standalone + signals) · SCSS · Vitest · ESLint · Prettier · GitHub Actions
@@ -42,6 +44,7 @@ Puis ouvrir http://localhost:4300 (port 4300 pour ne pas entrer en conflit avec 
 | `npm run format:check` | Vérifie le formatage sans modifier       |
 | `npm run build`        | Build de production dans `dist/`         |
 | `npm run build:pages`  | Build pour GitHub Pages (`/nouros/`)     |
+| `npm run notes`        | Régénère la liste des articles           |
 
 La CI lance `format:check`, `lint`, `test` et `build` sur chaque PR.
 

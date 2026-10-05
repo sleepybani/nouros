@@ -44,7 +44,7 @@ describe('runCommand', () => {
     it('keeps them out of help', () => {
       const helpText = runCommand('help').lines.join('\n');
 
-      for (const easterEgg of ['sudo', 'coffee', 'sleep', 'hello']) {
+      for (const easterEgg of ['sudo', 'coffee', 'sleep', 'hello', 'write']) {
         expect(helpText).not.toContain(easterEgg);
       }
     });
