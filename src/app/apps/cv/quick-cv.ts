@@ -13,7 +13,7 @@ export class QuickCv {
   protected readonly cv = CV;
   protected readonly profile = PROFILE;
   protected readonly skillGroups = SKILL_GROUPS;
-  protected readonly projects = PROJECTS;
+  protected readonly cvProjects = PROJECTS.filter((project) => !project.draft);
 
   protected print(): void {
     window.print();

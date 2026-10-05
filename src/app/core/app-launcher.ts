@@ -13,8 +13,8 @@ export interface AppLocation {
 
 /**
  * The only entry point the UI uses to open, focus, minimize or close apps.
- * The URL is the source of truth for the focused app: `/projects/ev-on` means
- * "Explorer is in front, showing EV-ON". This keeps links shareable.
+ * The URL is the source of truth for the focused app: `/projects/evo-on` means
+ * "Explorer is in front, showing EVO-ON". This keeps links shareable.
  */
 @Injectable({ providedIn: 'root' })
 export class AppLauncher {

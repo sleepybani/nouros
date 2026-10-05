@@ -6,7 +6,7 @@ const isKnownApp: CanMatchFn = (_route, segments) => !!findAppByRoute(segments[0
 
 /**
  * Every URL renders the same Shell (desktop or mobile). The child routes only exist so
- * the router accepts `/projects` or `/projects/ev-on`; AppLauncher reads them.
+ * the router accepts `/projects` or `/projects/evo-on`; AppLauncher reads them.
  */
 export const routes: Routes = [
   {

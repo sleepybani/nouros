@@ -9,7 +9,7 @@
   </div>
 
   <header class="cv__header">
-    <h3 class="cv__name">{{ profile.name }}</h3>
+    <h3 class="cv__name">{{ profile.fullName }}</h3>
     <p class="cv__headline">{{ cv.headline }}</p>
     <p class="cv__contact">
       {{ profile.location }} ·
@@ -34,7 +34,13 @@
             <strong>{{ entry.title }}</strong> — {{ entry.place }}
             <span class="cv__period">{{ entry.period }}</span>
           </p>
-          <p>{{ entry.description }}</p>
+          @if (entry.highlights.length > 0) {
+            <ul class="cv__highlights">
+              @for (highlight of entry.highlights; track highlight) {
+                <li>{{ highlight }}</li>
+              }
+            </ul>
+          }
         </div>
       }
     </section>
@@ -53,7 +59,7 @@
   <section class="cv__section">
     <h4>Selected projects</h4>
     <ul class="cv__projects">
-      @for (project of projects; track project.slug) {
+      @for (project of cvProjects; track project.slug) {
         <li>
           <strong>{{ project.name }}</strong> — {{ project.tagline }}
         </li>
@@ -70,11 +76,26 @@
             <strong>{{ entry.title }}</strong> — {{ entry.place }}
             <span class="cv__period">{{ entry.period }}</span>
           </p>
-          <p>{{ entry.description }}</p>
+          @if (entry.highlights.length > 0) {
+            <ul class="cv__highlights">
+              @for (highlight of entry.highlights; track highlight) {
+                <li>{{ highlight }}</li>
+              }
+            </ul>
+          }
         </div>
       }
     </section>
   }
+
+  <section class="cv__section">
+    <h4>Awards</h4>
+    <ul class="cv__projects">
+      @for (award of cv.awards; track award) {
+        <li>{{ award }}</li>
+      }
+    </ul>
+  </section>
 
   <section class="cv__section">
     <h4>Languages</h4>

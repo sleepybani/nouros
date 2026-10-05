@@ -28,7 +28,7 @@ describe('Terminal', () => {
 
   it('greets the visitor with whoami', () => {
     expect(outputText()).toContain('nour@nouros:~$ whoami');
-    expect(outputText()).toContain('full-stack JS developer');
+    expect(outputText()).toContain('full-stack JavaScript engineer');
   });
 
   it('runs a typed command and clears the input', async () => {
