@@ -86,6 +86,21 @@
   font-size: var(--font-size-sm);
 }
 
+.notes__external {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+}
+
+.notes__external-link {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-peach);
+  color: var(--color-bg);
+  font-weight: 800;
+  text-decoration: none;
+}
+
 .notes__status {
   color: var(--color-text-muted);
 }

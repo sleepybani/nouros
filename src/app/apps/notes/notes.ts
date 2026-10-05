@@ -13,12 +13,13 @@ import { APP_PARAMS } from '../../core/app-params';
 import { findAppById } from '../../core/app-registry';
 import { NOTES, Note, findNoteBySlug } from '../../data/notes';
 import { loadNoteHtml } from './note-loader';
+import { NoteShare } from './note-share';
 
 type NoteContent = { state: 'loading' } | { state: 'loaded'; html: string } | { state: 'error' };
 
 @Component({
   selector: 'app-notes',
-  imports: [DatePipe],
+  imports: [DatePipe, NoteShare],
   templateUrl: './notes.html',
   styleUrl: './notes.scss',
 })
@@ -43,7 +44,7 @@ export class Notes {
   constructor() {
     effect(() => {
       const note = this.openedNote();
-      if (note) {
+      if (note && !note.externalUrl) {
         untracked(() => this.loadContent(note));
       }
     });
@@ -55,6 +56,10 @@ export class Notes {
 
   protected backToList(): void {
     this.launcher.launch(this.notesApp);
+  }
+
+  protected hostOf(url: string): string {
+    return new URL(url).hostname.replace(/^www\./, '');
   }
 
   private loadContent(note: Note): void {

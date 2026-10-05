@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { APP_PARAMS } from '../../core/app-params';
 import { AppParams } from '../../core/os-app';
-import { NOTES } from '../../data/notes';
+import { NOTES, buildNewArticleUrl } from '../../data/notes';
 import { Notes } from './notes';
 
 describe('Notes', () => {
@@ -58,5 +58,59 @@ describe('Notes', () => {
     await render();
 
     expect(page().querySelector('[role="alert"]')?.textContent).toContain('could not be loaded');
+  });
+
+  describe('articles published elsewhere', () => {
+    const externalNote = NOTES.find((note) => note.externalUrl)!;
+
+    it('links to the original article instead of loading a body', async () => {
+      const fetchSpy = vi.spyOn(globalThis, 'fetch');
+      params.set({ slug: externalNote.slug });
+
+      await render();
+
+      const readLink = page().querySelector<HTMLAnchorElement>('.notes__external-link')!;
+      expect(readLink.href).toBe(externalNote.externalUrl);
+      expect(readLink.textContent).toContain('Read on sfeir.dev');
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('sharing', () => {
+    beforeEach(() => {
+      vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('Hello'));
+      params.set({ slug: NOTES[0].slug });
+    });
+
+    it('shares the article link on LinkedIn', async () => {
+      await render();
+
+      const linkedInLink = Array.from(page().querySelectorAll<HTMLAnchorElement>('a')).find(
+        (link) => link.textContent?.includes('LinkedIn'),
+      )!;
+      expect(linkedInLink.href).toContain('linkedin.com/sharing/share-offsite');
+      expect(decodeURIComponent(linkedInLink.href)).toContain(`notes/${NOTES[0].slug}`);
+    });
+
+    it('copies the article link', async () => {
+      const writeText = vi.fn().mockResolvedValue(undefined);
+      vi.stubGlobal('navigator', { ...navigator, clipboard: { writeText } });
+      await render();
+
+      page().querySelector<HTMLButtonElement>('.note-share__button')!.click();
+      await fixture.whenStable();
+
+      expect(writeText).toHaveBeenCalledWith(expect.stringContaining(`notes/${NOTES[0].slug}`));
+      expect(page().textContent).toContain('Link copied');
+      vi.unstubAllGlobals();
+    });
+  });
+
+  it('prepares a GitHub editor with an article template', () => {
+    const editorUrl = new URL(buildNewArticleUrl(new Date('2026-10-05T12:00:00Z')));
+
+    expect(editorUrl.pathname).toBe('/sleepybani/nouros/new/main/public/notes');
+    expect(editorUrl.searchParams.get('value')).toContain('date: 2026-10-05');
+    expect(editorUrl.searchParams.get('value')).toContain('category: dev');
   });
 });

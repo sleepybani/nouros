@@ -1,3 +1,10 @@
+---
+title: Why my portfolio is an operating system
+date: 2026-10-03
+category: dev
+summary: A portfolio that shows how I think, not just what I built.
+---
+
 A portfolio is usually a long page: a hero, a few cards, a contact form. It works, but it all looks the same, and it does not say much about _how_ someone thinks.
 
 So I built mine as a tiny operating system.
