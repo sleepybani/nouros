@@ -98,4 +98,95 @@ describe('Desktop', () => {
     expect(windowManager.windows()[0].x).toBe(0);
     expect(windowManager.windows()[0].y).toBe(0);
   });
+
+  describe('maximize', () => {
+    beforeEach(() => harness.navigateByUrl('/terminal'));
+
+    it('maximizes and restores with the green button', async () => {
+      const maximizeButton = () =>
+        page().querySelector<HTMLButtonElement>('.app-window__control--maximize')!;
+
+      maximizeButton().click();
+      await harness.fixture.whenStable();
+      expect(page().querySelector('app-window')!.classList).toContain('app-window--maximized');
+      expect(maximizeButton().getAttribute('aria-label')).toBe('Restore Terminal');
+
+      maximizeButton().click();
+      await harness.fixture.whenStable();
+      expect(page().querySelector('app-window')!.classList).not.toContain('app-window--maximized');
+    });
+
+    it('maximizes on a double click on the title bar', async () => {
+      page()
+        .querySelector('.app-window__title')!
+        .dispatchEvent(new MouseEvent('dblclick', { bubbles: true }));
+
+      expect(windowManager.windows()[0].maximized).toBe(true);
+    });
+
+    it('cannot be dragged while maximized', async () => {
+      windowManager.toggleMaximize('terminal');
+      await harness.fixture.whenStable();
+      const start = windowManager.windows()[0];
+      const titlebar = page().querySelector<HTMLElement>('.app-window__titlebar')!;
+
+      titlebar.dispatchEvent(
+        new MouseEvent('pointerdown', { button: 0, clientX: 200, clientY: 60, bubbles: true }),
+      );
+      titlebar.dispatchEvent(
+        new MouseEvent('pointermove', { clientX: 300, clientY: 160, bubbles: true }),
+      );
+
+      expect(windowManager.windows()[0].x).toBe(start.x);
+    });
+  });
+
+  describe('resize', () => {
+    const resizeHandle = () => page().querySelector<HTMLButtonElement>('.app-window__resize')!;
+
+    beforeEach(() => harness.navigateByUrl('/terminal'));
+
+    it('grows when the corner handle is dragged', () => {
+      const start = windowManager.windows()[0];
+
+      resizeHandle().dispatchEvent(
+        new MouseEvent('pointerdown', { button: 0, clientX: 800, clientY: 460, bubbles: true }),
+      );
+      resizeHandle().dispatchEvent(
+        new MouseEvent('pointermove', { clientX: 850, clientY: 500, bubbles: true }),
+      );
+      resizeHandle().dispatchEvent(new MouseEvent('pointerup', { bubbles: true }));
+
+      expect(windowManager.windows()[0]).toMatchObject({
+        width: start.width + 50,
+        height: start.height + 40,
+      });
+    });
+
+    it('can be resized with the arrow keys', async () => {
+      const start = windowManager.windows()[0];
+
+      resizeHandle().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+      await harness.fixture.whenStable();
+      resizeHandle().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+
+      expect(windowManager.windows()[0]).toMatchObject({
+        width: start.width + 24,
+        height: start.height - 24,
+      });
+    });
+
+    it('never grows past the screen edge', () => {
+      resizeHandle().dispatchEvent(
+        new MouseEvent('pointerdown', { button: 0, clientX: 800, clientY: 460, bubbles: true }),
+      );
+      resizeHandle().dispatchEvent(
+        new MouseEvent('pointermove', { clientX: 9000, clientY: 9000, bubbles: true }),
+      );
+
+      const { x, y, width, height } = windowManager.windows()[0];
+      expect(x + width).toBeLessThanOrEqual(window.innerWidth);
+      expect(y + height).toBeLessThanOrEqual(window.innerHeight - 48);
+    });
+  });
 });

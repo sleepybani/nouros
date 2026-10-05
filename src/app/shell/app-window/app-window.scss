@@ -30,6 +30,16 @@
     0 0 0 1px var(--color-accent);
 }
 
+:host(.app-window--maximized) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - var(--taskbar-height));
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+}
+
 :host([hidden]) {
   display: none;
 }
@@ -84,6 +94,35 @@
   background: var(--color-peach);
 }
 
+.app-window__control--maximize {
+  background: var(--color-mint);
+}
+
+.app-window__resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    transparent 0 55%,
+    var(--color-border) 55% 62%,
+    transparent 62% 72%,
+    var(--color-border) 72% 79%,
+    transparent 79%
+  );
+  cursor: nwse-resize;
+  touch-action: none;
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgb(255 255 255 / 0.06);
+  }
+}
+
 .app-window__title {
   display: flex;
   align-items: center;
@@ -108,5 +147,10 @@
     max-width: none;
     max-height: none;
     border-radius: 0;
+  }
+
+  .app-window__control--maximize,
+  .app-window__resize {
+    display: none;
   }
 }

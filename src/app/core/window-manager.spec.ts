@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { WindowManager } from './window-manager';
+import { MIN_WINDOW_SIZE, WindowManager } from './window-manager';
 
 describe('WindowManager', () => {
   let windowManager: WindowManager;
@@ -114,6 +114,36 @@ describe('WindowManager', () => {
       const [trash] = windowManager.windows();
       expect(trash.x).toBe(300);
       expect(trash.y).toBe(200);
+    });
+  });
+
+  describe('resize', () => {
+    it('changes the window size', () => {
+      windowManager.open('notes');
+
+      windowManager.resize('notes', 900, 600);
+
+      expect(windowManager.windows()[0]).toMatchObject({ width: 900, height: 600 });
+    });
+
+    it('never goes below the minimum size', () => {
+      windowManager.open('notes');
+
+      windowManager.resize('notes', 10, 10);
+
+      expect(windowManager.windows()[0]).toMatchObject(MIN_WINDOW_SIZE);
+    });
+  });
+
+  describe('toggleMaximize', () => {
+    it('maximizes, then restores the window', () => {
+      windowManager.open('paint');
+
+      windowManager.toggleMaximize('paint');
+      expect(windowManager.windows()[0].maximized).toBe(true);
+
+      windowManager.toggleMaximize('paint');
+      expect(windowManager.windows()[0].maximized).toBe(false);
     });
   });
 });

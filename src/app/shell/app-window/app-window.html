@@ -4,6 +4,7 @@
   (pointermove)="drag($event)"
   (pointerup)="endDrag()"
   (pointercancel)="endDrag()"
+  (dblclick)="toggleMaximizeFromTitleBar($event)"
 >
   <div class="app-window__controls">
     <button
@@ -18,6 +19,13 @@
       [attr.aria-label]="'Minimize ' + app().title"
       (click)="minimize()"
     ></button>
+    <button
+      type="button"
+      class="app-window__control app-window__control--maximize"
+      [attr.aria-label]="(state().maximized ? 'Restore ' : 'Maximize ') + app().title"
+      [attr.aria-pressed]="state().maximized"
+      (click)="toggleMaximize()"
+    ></button>
   </div>
 
   <h2 class="app-window__title" [id]="titleId()">
@@ -27,3 +35,16 @@
 </header>
 
 <app-content class="app-window__content" [app]="app()" [params]="params()" />
+
+@if (!state().maximized) {
+  <button
+    type="button"
+    class="app-window__resize"
+    [attr.aria-label]="'Resize ' + app().title + ' (arrow keys)'"
+    (pointerdown)="startResize($event)"
+    (pointermove)="resize($event)"
+    (pointerup)="endResize()"
+    (pointercancel)="endResize()"
+    (keydown)="resizeWithKeyboard($event)"
+  ></button>
+}
